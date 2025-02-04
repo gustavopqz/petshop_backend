@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using PetShop.Application.DTO;
 using PetShop.Application.Services.Interfaces;
 using PetShop.Domain.Entities;
 
@@ -32,6 +33,25 @@ namespace PetShop.Api.Controllers.V1
             catch (Exception ex)
             {
                 return BadRequest(new { msg = ex.Message });
+            }
+        }
+        [HttpPost("CreateUser")]
+        public async Task<IActionResult> CreateUser(UserDto users)
+        {
+            try
+            {
+                var response = await _usersService.CreateUser(users);
+
+                if (!response.Success)
+                {
+                    return UnprocessableEntity(response.Errors);
+                }
+
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex);
             }
         }
 

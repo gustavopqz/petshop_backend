@@ -10,7 +10,7 @@ using PetShop.Facade.Interfaces;
 
 namespace PetShop.Application.Services
 {
-    public class CompanyService : IcompaniesService
+    public class CompanyService : ICompaniesService
     {
         private readonly ICompaniesRepository _companiesRepository;
         private readonly IBrasilApiHttpService _brasilApiHttpService;
@@ -184,7 +184,7 @@ namespace PetShop.Application.Services
             }
             
             var company = AutoMapperCompanies.ToCompanies(companiesDto);
-            _companiesRepository.detached(companyBydData);
+            _companiesRepository.Detached(companyBydData);
             company.PhoneNumber = new string(company.PhoneNumber.Where(char.IsDigit).ToArray());
             company.RegistrationNumber = companyBydData.RegistrationNumber;
             company.CompanyId = companyBydData.CompanyId;

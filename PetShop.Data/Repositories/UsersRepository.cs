@@ -26,5 +26,12 @@ namespace PetShop.Data.Repositories
 
             return usuarioAuth;
         }
+
+        public async Task<Users> GetUserByRegistrationNumber(string RegistrationNumber)
+        {
+            var usuarioAuth = await _Context.Users.FirstOrDefaultAsync(x => x.RegistrationNumber == RegistrationNumber);
+
+            return usuarioAuth;
+        }
     }
 }

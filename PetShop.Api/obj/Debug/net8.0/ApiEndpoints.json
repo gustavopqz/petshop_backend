@@ -16,6 +16,22 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "PetShop.Api.Controllers.V1.BrasilApiController",
+    "Method": "GetCep",
+    "RelativePath": "api/BrasilApi/GetCep/{cep}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "cep",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "PetShop.Api.Controllers.V1.CompanyController",
     "Method": "GetCompanies",
     "RelativePath": "api/v1/companies",
@@ -111,6 +127,22 @@
         "Name": "password",
         "Type": "System.String",
         "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PetShop.Api.Controllers.V1.UserController",
+    "Method": "CreateUser",
+    "RelativePath": "api/v1/users/CreateUser",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "users",
+        "Type": "PetShop.Application.DTO.UserDto",
+        "IsRequired": true
       }
     ],
     "ReturnTypes": []

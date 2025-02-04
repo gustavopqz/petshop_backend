@@ -12,7 +12,7 @@ namespace PetShop.Application.Services.Interfaces
 {
     public interface IUsersService
     {
-        Task<InternalResponse<Users>> CreateUser(Users users);
+        Task<InternalResponse<Users>> CreateUser(UserDto users);
 
         Task<InternalResponse<string>> Authenticate(string RegistrationNumber, string password);
 
