@@ -12,19 +12,18 @@ namespace PetShop.Application.MappingsConfig
 {
     public static class AutoMapperUsers
     {
-        public static Users ToUsers(this UserDto usersDto, Response<CepResponse> response) => new Users
+        public static Users ToUsers(this UserDto usersDto) => new Users
         {
             FullName = usersDto.FullName,
-            RegistrationNumber = usersDto.RegistrationNumber,
+            RegistrationNumber = new string(usersDto.RegistrationNumber.Where(char.IsDigit).ToArray()),
             CompanyId = usersDto.CompanyId,
             Email = usersDto.Email,
             Password = usersDto.Password,
-            Phone = usersDto.Phone,
-            PostalCode = response.Data.cep,
-            State = response.Data.state,
-            Address = response.Data.street,
+            Phone = new string(usersDto.Phone.Where(char.IsDigit).ToArray()),
+            PostalCode = new string(usersDto.PostalCode.Where(char.IsDigit).ToArray()),
+            State = usersDto.State,
             Country = "Brazil",
-            City = response.Data.city
+            City = usersDto.City
         };
         public static Users ToUsers(this UserDataDto usersDto, Response<CepResponse> response) => new Users
         {
@@ -51,8 +50,7 @@ namespace PetShop.Application.MappingsConfig
         public static UserDataDto ToUserDto(this Users user) => new
            (user.FullName, user.RegistrationNumber, user.CompanyId,
             user.Email, user.Phone, user.PostalCode,
-            user.State, user.City, user.Country,
-            user.Address
+            user.State, user.City, user.Country
            );
     }
 }

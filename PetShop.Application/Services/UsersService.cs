@@ -108,18 +108,13 @@ namespace PetShop.Application.Services
                 return response;
             }
 
-            var address = await _brasilApiHttpService.GetCep(usersDto.Cep);
-            var user = AutoMapperUsers.ToUsers(usersDto, address);
-
-            user.RegistrationNumber = new string(user.RegistrationNumber.Where(char.IsDigit).ToArray());
-            user.Phone = new string(user.Phone.Where(char.IsDigit).ToArray());
-            user.PostalCode = new string(user.PostalCode.Where(char.IsDigit).ToArray());
+            var user = AutoMapperUsers.ToUsers(usersDto);
 
             user.Password = PasswordCryptographyService.Cryptography(user.Password);
             user.UserType = UserType.Costumer;
             await _usersRepository.Create(user);
-
             response.Success = true;
+
             return response;
 
         }
@@ -134,6 +129,7 @@ namespace PetShop.Application.Services
             await _usersRepository.Delete(getUser);
             return true;
         }
+
         public async Task<InternalResponse<List<UserDataDto>>> GetAll()
         {
             var list = new List<UserDataDto>();
@@ -224,15 +220,10 @@ namespace PetShop.Application.Services
                 response.Errors = "this Email already exists";
                 return response;
             }
-            var address = await _brasilApiHttpService.GetCep(userByIdData.PostalCode);
-
-            if (userDto.Cep != null)
-            {
-                address = await _brasilApiHttpService.GetCep(userDto.Cep);
-            }
-
-            var user = AutoMapperUsers.ToUsers(userDto, address);
+            
+            var user = AutoMapperUsers.ToUsers(userDto);
             userByIdData = InsertUser(userByIdData, user);
+
             _usersRepository.Detached(userByIdData);
             userByIdData.UpdatedAt = DateTime.Now;
             await _usersRepository.Update(userByIdData);
