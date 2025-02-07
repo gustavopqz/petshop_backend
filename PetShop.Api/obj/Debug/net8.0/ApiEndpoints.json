@@ -50,8 +50,8 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "companiesFilter",
-        "Type": "PetShop.Application.Filters.CompaniesFilter",
+        "Name": "companiesDto",
+        "Type": "PetShop.Application.DTO.CompaniesDto",
         "IsRequired": true
       }
     ],

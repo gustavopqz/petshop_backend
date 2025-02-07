@@ -466,3 +466,4 @@ C:\Users\Raphael\source\repos\impinheiro\petshop_backend\PetShop.Api\obj\Debug\n
 C:\Users\Raphael\source\repos\impinheiro\petshop_backend\PetShop.Api\obj\Debug\net8.0\PetShop.Api.pdb
 C:\Users\Raphael\source\repos\impinheiro\petshop_backend\PetShop.Api\obj\Debug\net8.0\PetShop.Api.genruntimeconfig.cache
 C:\Users\Raphael\source\repos\impinheiro\petshop_backend\PetShop.Api\obj\Debug\net8.0\ref\PetShop.Api.dll
+C:\Users\paulo\source\repos\PRbrate\petshop_backend\PetShop.Api\bin\Debug\net8.0\Swashbuckle.AspNetCore.Annotations.dll

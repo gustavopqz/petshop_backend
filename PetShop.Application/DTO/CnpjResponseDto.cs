@@ -2,24 +2,47 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace PetShop.Application.DTO
 {
     public class CnpjResponseDto
     {
-        
 
-        public string cnpj { get; set; }
-        public string razao_social { get; set; }
-        public string nome_fantasia { get; set; }
-        public string descricao_situacao_cadastral { get; set; }
-        public int cep { get; set; }
-        public string uf { get; set; }
-        public string logradouro { get; set; }
-        public string municipio { get; set; }
-        public string ddd_telefone_1 { get; set; }
-        public int capital_social { get; set; }
-        public string descricao_porte { get; set; }
+        [JsonPropertyName("cnpj")]
+        public string RegistrationNumber { get; set; }
+
+        [JsonPropertyName("razao_social")]
+        public string CompanyName { get; set; }
+
+        [JsonPropertyName("nome_fantasia")]
+        public string TradeName { get; set; }
+
+        [JsonPropertyName("descricao_situacao_cadastral")]
+        public string DescriptionRegistrationStatus { get; set; }
+
+        [JsonPropertyName("cep")]
+        public int PostalCode { get; set; }
+
+        [JsonPropertyName("uf")]
+        public string State { get; set; }
+
+        [JsonPropertyName("logradouro")]
+        public string Country { get; set; }
+
+        [JsonPropertyName("municipio")]
+        public string City { get; set; }
+
+        [JsonPropertyName("ddd_telefone_1")]
+        public string PhoneNumber { get; set; }
+
+        [JsonPropertyName("capital_social")]
+        public int ShareCapital { get; set; }
+
+       
+        [JsonPropertyName("descricao_porte")]
+        public string DescriptionSize { get; set; }
+
     }
 }
