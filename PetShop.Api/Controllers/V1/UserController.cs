@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using PetShop.Application.DTO;
 using PetShop.Application.Services.Interfaces;
 using PetShop.Core.Entities;
@@ -8,6 +9,8 @@ namespace PetShop.Api.Controllers.V1
 {
     [Route("api/v1/users")]
     [ApiController]
+    [Authorize]
+
     public class UserController : ControllerBase
     {
         private readonly IUsersService _usersService;
@@ -18,6 +21,7 @@ namespace PetShop.Api.Controllers.V1
         }
 
         [HttpPost("Authenticate")]
+        [AllowAnonymous]
         public async Task<IActionResult> AuthenticateUser(string RegitrationNumber, string password)
         {
             try
@@ -37,6 +41,7 @@ namespace PetShop.Api.Controllers.V1
             }
         }
         [HttpPost("CreateUser")]
+        [AllowAnonymous]
         public async Task<IActionResult> CreateUser(UserDto users)
         {
             try
@@ -57,6 +62,7 @@ namespace PetShop.Api.Controllers.V1
         }
 
         [HttpGet]
+        [Authorize(Roles = "Employer, Admin")]
         public async Task<IActionResult> GetAll()
         {
             try
@@ -76,6 +82,7 @@ namespace PetShop.Api.Controllers.V1
             }
         }
         [HttpGet("GetById/{userId}")]
+        [Authorize(Roles = "Employer, Admin")]
         public async Task<IActionResult> GetById(int userId)
         {
             {
@@ -100,6 +107,7 @@ namespace PetShop.Api.Controllers.V1
         }
 
         [HttpGet("GetAllByCompanyId/{companyId}")]
+        [Authorize(Roles = "Employer, Admin")]
         public async Task<IActionResult> GetAllByCompanyId(int companyId)
         {
             {
@@ -124,7 +132,7 @@ namespace PetShop.Api.Controllers.V1
         }
 
         [HttpDelete("{userId}")]
-
+        [Authorize(Roles = "Employer, Admin")]
         public async Task<IActionResult> DeleteUser(int userId)
         {
             var users = await _usersService.DeleteUser(userId);
@@ -136,7 +144,7 @@ namespace PetShop.Api.Controllers.V1
         }
 
         [HttpPut("{userId}")]
-
+        [Authorize]
         public async Task<IActionResult> UpdateUser(int userId, UserDto userDto)
         {
 

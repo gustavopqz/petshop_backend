@@ -21,6 +21,7 @@ namespace PetShop.Api.Controllers.V1
         }
 
         [HttpGet]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> GetCompanies()
         {
             try
@@ -41,6 +42,7 @@ namespace PetShop.Api.Controllers.V1
         }
 
         [HttpGet("{id}")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> GetCompanyId(int id)
         {
             try
@@ -60,6 +62,7 @@ namespace PetShop.Api.Controllers.V1
         }
 
         [HttpGet("/cnpj/{register}")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> GetCompanyRegiter(string register)
         {
             try
@@ -79,6 +82,7 @@ namespace PetShop.Api.Controllers.V1
         }
 
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> CreateCompany(CompaniesDto companiesDto)
         {
 
@@ -100,6 +104,7 @@ namespace PetShop.Api.Controllers.V1
         }
 
         [HttpPut("{id}")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> UpdateCompany(int id, CompaniesUpdateDto companiesDto)
         {
             try
@@ -118,6 +123,7 @@ namespace PetShop.Api.Controllers.V1
         }
 
         [HttpDelete("{id}")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> DeleteCompany(int id)
         {
             try
