@@ -197,6 +197,22 @@
   {
     "ContainingType": "PetShop.Api.Controllers.V1.UserController",
     "Method": "GetById",
+    "RelativePath": "api/v1/users/GetByEmail/{email}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "email",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PetShop.Api.Controllers.V1.UserController",
+    "Method": "GetById",
     "RelativePath": "api/v1/users/GetById/{userId}",
     "HttpMethod": "GET",
     "IsController": true,
@@ -205,6 +221,38 @@
       {
         "Name": "userId",
         "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PetShop.Api.Controllers.V1.UserController",
+    "Method": "GetByPhoneNumber",
+    "RelativePath": "api/v1/users/GetByPhoneNumber/{phonenumber}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "phonenumber",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PetShop.Api.Controllers.V1.UserController",
+    "Method": "GetByRegistrationNumber",
+    "RelativePath": "api/v1/users/GetByRegistrationNumber/{registrationNumber}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "registrationNumber",
+        "Type": "System.String",
         "IsRequired": true
       }
     ],

@@ -22,6 +22,7 @@ namespace PetShop.Application.MappingsConfig
             PostalCode = new string(usersDto.PostalCode.Where(char.IsDigit).ToArray()),
             State = usersDto.State,
             Country = "Brazil",
+            Address = usersDto.Address,
             City = usersDto.City
         };
         public static Users ToUsers(this UserDataDto usersDto, Response<CepResponse> response) => new Users

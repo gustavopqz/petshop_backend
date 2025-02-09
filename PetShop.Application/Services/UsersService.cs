@@ -148,7 +148,55 @@ namespace PetShop.Application.Services
             return response;
         }
 
-        
+        public async Task<InternalResponse<UserDataDto>> GetByRegistrationNumber(string registrationNumber)
+        {
+            var response = new InternalResponse<UserDataDto>();
+            registrationNumber = new string(registrationNumber.Where(char.IsDigit).ToArray());
+            var user = await _usersRepository.GetUserByRegistrationNumber(registrationNumber);
+            if (user == null)
+            {
+                response.Success = false;
+                response.Errors = "There is no such user with that RegistrationNumber on the database";
+                return response;
+            }
+            response.Data = AutoMapperUsers.ToUserDto(user);
+            return response;
+        }
+
+        public async Task<InternalResponse<UserDataDto>> GetByEmail(string email)
+        {
+            var response = new InternalResponse<UserDataDto>();
+            var user = await _usersRepository.GetByEmailAsync(email);
+            if (user == null)
+            {
+                response.Success = false;
+                response.Errors = "There is no such user with that Email on the database";
+                return response;
+            }
+            response.Data = AutoMapperUsers.ToUserDto(user);
+            return response;
+        }
+        public async Task<InternalResponse<List<UserDataDto>>> GetByPhoneNumber(string phoneNumber)
+        {
+            var list = new List<UserDataDto>();
+            var response = new InternalResponse<List<UserDataDto>>();
+            var user = await _usersRepository.GetByPhoneNumber(phoneNumber);
+            if (user == null)
+            {
+                response.Success = false;
+                response.Errors = "There is no such data with PhoneNumber on the database";
+                return response;
+            }
+
+            foreach (Users u in user)
+            {
+                list.Add(AutoMapperUsers.ToUserDto(u));
+            }
+            response.Data = list;
+            return response;
+        }
+
+
         public async Task<InternalResponse<UserDataDto>> GetById(int id)
         {
             var response = new InternalResponse<UserDataDto>();

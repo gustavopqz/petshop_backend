@@ -16,8 +16,12 @@ namespace PetShop.Application.Services.Interfaces
         Task<InternalResponse<string>> Authenticate(string RegistrationNumber, string password);
         Task<InternalResponse<UserDataDto>> GetById(int id);
         Task<InternalResponse<List<UserDataDto>>> GetAll();
+        Task<InternalResponse<List<UserDataDto>>> GetByPhoneNumber(string phoneNumber);
+        Task<InternalResponse<UserDataDto>> GetByRegistrationNumber(string registrationNumber);
+        Task<InternalResponse<UserDataDto>> GetByEmail(string email);
         Task<bool> DeleteUser(int id);
         Task<InternalResponse<UserDataDto>> UpdateUser(int id, UserDto userDto);
+        
 
     }
 }

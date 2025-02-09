@@ -106,7 +106,80 @@ namespace PetShop.Api.Controllers.V1
             }
         }
 
-        
+        [HttpGet("GetByRegistrationNumber/{registrationNumber}")]
+        [Authorize(Roles = "Employer, Admin")]
+        public async Task<IActionResult> GetByRegistrationNumber(string registrationNumber)
+        {
+            {
+                try
+                {
+                    var response = await _usersService.GetByRegistrationNumber(registrationNumber);
+
+                    if (!response.Success)
+                    {
+                        return UnprocessableEntity(response.Errors);
+                    }
+
+                    return Ok(response.Data);
+                }
+                catch (Exception ex)
+                {
+                    return BadRequest(ex);
+
+
+                }
+            }
+        }
+
+        [HttpGet("GetByEmail/{email}")]
+        [Authorize(Roles = "Employer, Admin")]
+        public async Task<IActionResult> GetById(string email)
+        {
+            {
+                try
+                {
+                    var response = await _usersService.GetByEmail(email);
+
+                    if (!response.Success)
+                    {
+                        return UnprocessableEntity(response.Errors);
+                    }
+
+                    return Ok(response.Data);
+                }
+                catch (Exception ex)
+                {
+                    return BadRequest(ex);
+
+
+                }
+            }
+        }
+
+        [HttpGet("GetByPhoneNumber/{phonenumber}")]
+        [Authorize(Roles = "Employer, Admin")]
+        public async Task<IActionResult> GetByPhoneNumber(string phonenumber)
+        {
+            {
+                try
+                {
+                    var response = await _usersService.GetByPhoneNumber(phonenumber);
+
+                    if (!response.Success)
+                    {
+                        return UnprocessableEntity(response.Errors);
+                    }
+
+                    return Ok(response.Data);
+                }
+                catch (Exception ex)
+                {
+                    return BadRequest(ex);
+
+
+                }
+            }
+        }
 
         [HttpDelete("{userId}")]
         [Authorize(Roles = "Employer, Admin")]

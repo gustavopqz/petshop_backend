@@ -26,13 +26,13 @@ namespace PetShop.Api.Controllers.V1
 
                 return Ok(new
                 {
-                    RegistrationNumver = company.Data.cnpj,
+                    RegistrationNumber = company.Data.cnpj,
                     CompanyName = company.Data.razao_social,
                     TradeName = company.Data.nome_fantasia,
                     StatusCompany = company.Data.descricao_situacao_cadastral,
                     PostalCode = company.Data.cep,
                     State = company.Data.uf,
-                    Country = company.Data.logradouro,
+                    Adress = company.Data.logradouro,
                     City = company.Data.municipio,
                     PhoneNumber = company.Data.ddd_telefone_1,
 
