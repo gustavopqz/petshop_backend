@@ -27,14 +27,6 @@ namespace PetShop.Data.Repositories
             return userAuth;
         }
 
-        public async Task<List<Users>> GetAllByCompanyId(int companyId)
-        {
-            var usersCompany = await _Context.Users
-                .Where(x => x.CompanyId == companyId)
-                .ToListAsync();
-            return usersCompany;
-        }
-
         public async Task<Users> GetByEmailAsync(string email)
         {
             var company = await _Context.Users.FirstOrDefaultAsync(x => x.Email == email);

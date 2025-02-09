@@ -22,12 +22,10 @@ namespace PetShop.Application.Services
     public class UsersService : IUsersService
     {
         private readonly IUsersRepository _usersRepository;
-        private readonly IBrasilApiHttpService _brasilApiHttpService;
 
-        public UsersService(IUsersRepository usersRepository, IBrasilApiHttpService brasilApiHttpService)
+        public UsersService(IUsersRepository usersRepository)
         {
-            _usersRepository = usersRepository;
-            _brasilApiHttpService = brasilApiHttpService;
+            _usersRepository = usersRepository;            
         }
 
         public async Task<InternalResponse<string>> Authenticate(string RegistrationNumber, string password)
@@ -150,26 +148,7 @@ namespace PetShop.Application.Services
             return response;
         }
 
-        public async Task<InternalResponse<List<UserDataDto>>> GetAllByCompanyId(int companyId)
-        {
-            var list = new List<UserDataDto>();
-            var response = new InternalResponse<List<UserDataDto>>();
-            var user = await _usersRepository.GetAllByCompanyId(companyId);
-            if (user == null)
-            {
-                response.Success = false;
-                response.Errors = "There is no such data on the database";
-                return response;
-            }
-
-            foreach (Users u in user)
-            {
-                list.Add(AutoMapperUsers.ToUserDto(u));
-            }
-            response.Data = list;
-            return response;
-        }
-
+        
         public async Task<InternalResponse<UserDataDto>> GetById(int id)
         {
             var response = new InternalResponse<UserDataDto>();

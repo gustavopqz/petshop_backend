@@ -290,29 +290,6 @@
         }
       }
     },
-    "/api/v1/users/GetAllByCompanyId/{companyId}": {
-      "get": {
-        "tags": [
-          "User"
-        ],
-        "parameters": [
-          {
-            "name": "companyId",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      }
-    },
     "/api/v1/users/{userId}": {
       "delete": {
         "tags": [

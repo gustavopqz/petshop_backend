@@ -106,30 +106,7 @@ namespace PetShop.Api.Controllers.V1
             }
         }
 
-        [HttpGet("GetAllByCompanyId/{companyId}")]
-        [Authorize(Roles = "Employer, Admin")]
-        public async Task<IActionResult> GetAllByCompanyId(int companyId)
-        {
-            {
-                try
-                {
-                    var response = await _usersService.GetAllByCompanyId(companyId);
-
-                    if (!response.Success)
-                    {
-                        return UnprocessableEntity(response.Errors);
-                    }
-
-                    return Ok(response.Data);
-                }
-                catch (Exception ex)
-                {
-                    return BadRequest(ex);
-
-
-                }
-            }
-        }
+        
 
         [HttpDelete("{userId}")]
         [Authorize(Roles = "Employer, Admin")]

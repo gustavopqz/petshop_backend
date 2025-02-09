@@ -196,22 +196,6 @@
   },
   {
     "ContainingType": "PetShop.Api.Controllers.V1.UserController",
-    "Method": "GetAllByCompanyId",
-    "RelativePath": "api/v1/users/GetAllByCompanyId/{companyId}",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "companyId",
-        "Type": "System.Int32",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "PetShop.Api.Controllers.V1.UserController",
     "Method": "GetById",
     "RelativePath": "api/v1/users/GetById/{userId}",
     "HttpMethod": "GET",
