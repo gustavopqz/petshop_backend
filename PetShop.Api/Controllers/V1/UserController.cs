@@ -42,11 +42,11 @@ namespace PetShop.Api.Controllers.V1
         }
         [HttpPost("CreateUser")]
         [AllowAnonymous]
-        public async Task<IActionResult> CreateUser(UserDto users)
+        public async Task<IActionResult> CreateUser(UserDto users, string code)
         {
             try
             {
-                var response = await _usersService.CreateUser(users);
+                var response = await _usersService.CreateUser(users, code);
 
                 if (!response.Success)
                 {
@@ -193,14 +193,14 @@ namespace PetShop.Api.Controllers.V1
             return Ok();
         }
 
-        [HttpPut("{userId}")]
+        [HttpPut("{code}/{userId}")]
         [Authorize]
-        public async Task<IActionResult> UpdateUser(int userId, UserDto userDto)
+        public async Task<IActionResult> UpdateUser(string code, int userId, UserDto userDto)
         {
 
             try
             {
-                var companies = await _usersService.UpdateUser(userId, userDto);
+                var companies = await _usersService.UpdateUser(userId, userDto, code);
                 if (!companies.Success)
                 {
                     return UnprocessableEntity(companies.Errors);

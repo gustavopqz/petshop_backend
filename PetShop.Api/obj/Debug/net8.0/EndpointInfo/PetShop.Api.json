@@ -196,6 +196,55 @@
         }
       }
     },
+    "/api/mailSend": {
+      "post": {
+        "tags": [
+          "MailSend"
+        ],
+        "parameters": [
+          {
+            "name": "email",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/mailSend/verify": {
+      "post": {
+        "tags": [
+          "MailSend"
+        ],
+        "parameters": [
+          {
+            "name": "email",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "code",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/api/v1/users/Authenticate": {
       "post": {
         "tags": [
@@ -228,6 +277,15 @@
       "post": {
         "tags": [
           "User"
+        ],
+        "parameters": [
+          {
+            "name": "code",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
         ],
         "requestBody": {
           "content": {
@@ -377,12 +435,22 @@
             "description": "OK"
           }
         }
-      },
+      }
+    },
+    "/api/v1/users/{code}/{userId}": {
       "put": {
         "tags": [
           "User"
         ],
         "parameters": [
+          {
+            "name": "code",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
           {
             "name": "userId",
             "in": "path",

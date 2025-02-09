@@ -1,31 +1,24 @@
 ﻿using PetShop.Application.DTO;
-using PetShop.Application.Filters;
 using PetShop.Application.MappingsConfig;
 using PetShop.Application.Services.Interfaces;
-using PetShop.Core;
+using PetShop.Application.Services.OtherServices;
 using PetShop.Core.Entities;
-using PetShop.Data.Repositories;
 using PetShop.Data.Repositories.Interfaces;
 using PetShop.Domain.Entities;
 using PetShop.Domain.Entities.Enums;
 using PetShop.Domain.Entities.Validations.Services;
-using PetShop.Facade.Interfaces;
-using PetShop.Facade.Services;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PetShop.Application.Services
 {
     public class UsersService : IUsersService
     {
         private readonly IUsersRepository _usersRepository;
+        private readonly MemoryCacheService _memoryCacheService;
 
-        public UsersService(IUsersRepository usersRepository)
+        public UsersService(IUsersRepository usersRepository, MemoryCacheService memoryCache)
         {
-            _usersRepository = usersRepository;            
+            _usersRepository = usersRepository;
+            _memoryCacheService = memoryCache;
         }
 
         public async Task<InternalResponse<string>> Authenticate(string RegistrationNumber, string password)
@@ -70,8 +63,7 @@ namespace PetShop.Application.Services
             return response;
 
         }
-
-        public async Task<InternalResponse<Users>> CreateUser(UserDto usersDto)
+        public async Task<InternalResponse<Users>> CreateUser(UserDto usersDto, string code)
         {
 
             var response = new InternalResponse<Users>();
@@ -106,6 +98,23 @@ namespace PetShop.Application.Services
                 return response;
             }
 
+            string storyCode = _memoryCacheService.GetCode(usersDto.Email);
+
+            if (storyCode == null)
+            {
+                response.Success = false;
+                response.Errors = "Expired or invalid code!";
+                return response;
+            }
+            if (storyCode != code)
+            {
+                response.Success = false;
+                response.Errors = "Incorrect code! or expired";
+                return response;
+            }
+
+            _memoryCacheService.RemoveCode(usersDto.Email);
+
             var user = AutoMapperUsers.ToUsers(usersDto);
 
             user.Password = PasswordCryptographyService.Cryptography(user.Password);
@@ -116,7 +125,6 @@ namespace PetShop.Application.Services
             return response;
 
         }
-
         public async Task<bool> DeleteUser(int id)
         {
             var getUser = await _usersRepository.GetAsync(id);
@@ -128,6 +136,7 @@ namespace PetShop.Application.Services
             return true;
         }
 
+        #region gets
         public async Task<InternalResponse<List<UserDataDto>>> GetAll()
         {
             var list = new List<UserDataDto>();
@@ -195,8 +204,6 @@ namespace PetShop.Application.Services
             response.Data = list;
             return response;
         }
-
-
         public async Task<InternalResponse<UserDataDto>> GetById(int id)
         {
             var response = new InternalResponse<UserDataDto>();
@@ -210,8 +217,10 @@ namespace PetShop.Application.Services
             response.Data = AutoMapperUsers.ToUserDto(user);
             return response;
         }
+        #endregion
 
-        public async Task<InternalResponse<UserDataDto>> UpdateUser(int id, UserDto userDto)
+        #region update
+        public async Task<InternalResponse<UserDataDto>> UpdateUser(int id, UserDto userDto, string code)
         {
             var userByIdData = await _usersRepository.GetAsync(id);
             var response = new InternalResponse<UserDataDto>();
@@ -230,6 +239,7 @@ namespace PetShop.Application.Services
                     response.Errors = "Invalid Email";
                     return response;
                 }
+
             }
             if (userDto.Phone != null)
             {
@@ -247,7 +257,23 @@ namespace PetShop.Application.Services
                 response.Errors = "this Email already exists";
                 return response;
             }
-            
+
+            string storyCode = _memoryCacheService.GetCode(userDto.Email);
+
+            if (storyCode == null)
+            {
+                response.Success = false;
+                response.Errors = "Expired or invalid code!";
+                return response;
+            }
+            if (storyCode != code)
+            {
+                response.Success = false;
+                response.Errors = "Incorrect code! or expired";
+                return response;
+            }
+            _memoryCacheService.RemoveCode(userDto.Email);
+
             var user = AutoMapperUsers.ToUsers(userDto);
             userByIdData = InsertUser(userByIdData, user);
 
@@ -278,5 +304,6 @@ namespace PetShop.Application.Services
             return user;
 
         }
+        #endregion
     }
 }

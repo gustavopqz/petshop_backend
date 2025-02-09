@@ -32,6 +32,43 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "PetShop.Api.Controllers.V1.MailSendController",
+    "Method": "SendMail",
+    "RelativePath": "api/mailSend",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "email",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PetShop.Api.Controllers.V1.MailSendController",
+    "Method": "VerifyCodigo",
+    "RelativePath": "api/mailSend/verify",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "email",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "code",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "PetShop.Api.Controllers.V1.CompanyController",
     "Method": "GetCompanies",
     "RelativePath": "api/v1/companies",
@@ -122,6 +159,32 @@
   },
   {
     "ContainingType": "PetShop.Api.Controllers.V1.UserController",
+    "Method": "UpdateUser",
+    "RelativePath": "api/v1/users/{code}/{userId}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "code",
+        "Type": "System.String",
+        "IsRequired": true
+      },
+      {
+        "Name": "userId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "userDto",
+        "Type": "PetShop.Application.DTO.UserDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PetShop.Api.Controllers.V1.UserController",
     "Method": "DeleteUser",
     "RelativePath": "api/v1/users/{userId}",
     "HttpMethod": "DELETE",
@@ -131,27 +194,6 @@
       {
         "Name": "userId",
         "Type": "System.Int32",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "PetShop.Api.Controllers.V1.UserController",
-    "Method": "UpdateUser",
-    "RelativePath": "api/v1/users/{userId}",
-    "HttpMethod": "PUT",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "userId",
-        "Type": "System.Int32",
-        "IsRequired": true
-      },
-      {
-        "Name": "userDto",
-        "Type": "PetShop.Application.DTO.UserDto",
         "IsRequired": true
       }
     ],
@@ -190,6 +232,11 @@
         "Name": "users",
         "Type": "PetShop.Application.DTO.UserDto",
         "IsRequired": true
+      },
+      {
+        "Name": "code",
+        "Type": "System.String",
+        "IsRequired": false
       }
     ],
     "ReturnTypes": []
