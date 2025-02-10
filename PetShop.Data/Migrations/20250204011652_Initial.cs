@@ -7,7 +7,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace PetShop.Data.Migrations
 {
     /// <inheritdoc />
-    public partial class inittial : Migration
+    public partial class Initial : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -20,7 +20,7 @@ namespace PetShop.Data.Migrations
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     CompanyName = table.Column<string>(type: "character varying(255)", unicode: false, maxLength: 255, nullable: false),
                     TradeName = table.Column<string>(type: "character varying(100)", unicode: false, maxLength: 100, nullable: true),
-                    RegistrationNumber = table.Column<string>(type: "character varying(18)", unicode: false, maxLength: 18, nullable: false),
+                    RegistrationNumber = table.Column<string>(type: "character varying(18)", maxLength: 18, nullable: false),
                     Email = table.Column<string>(type: "character varying(255)", maxLength: 255, nullable: false),
                     PhoneNumber = table.Column<string>(type: "character varying(11)", unicode: false, maxLength: 11, nullable: true),
                     Address = table.Column<string>(type: "character varying(100)", unicode: false, maxLength: 100, nullable: true),
@@ -29,7 +29,7 @@ namespace PetShop.Data.Migrations
                     Country = table.Column<string>(type: "character varying(100)", unicode: false, maxLength: 100, nullable: true),
                     PostalCode = table.Column<string>(type: "character varying(12)", unicode: false, maxLength: 12, nullable: true),
                     Status = table.Column<string>(type: "text", nullable: false),
-                    CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false, defaultValueSql: "CURRENT_TIMESTAMP"),
                     UpdatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
                 },
                 constraints: table =>
@@ -77,10 +77,10 @@ namespace PetShop.Data.Migrations
                     Phone = table.Column<string>(type: "character varying(11)", unicode: false, maxLength: 11, nullable: false),
                     UserType = table.Column<string>(type: "text", nullable: false),
                     Address = table.Column<string>(type: "character varying(100)", unicode: false, maxLength: 100, nullable: true),
-                    city = table.Column<string>(type: "character varying(100)", unicode: false, maxLength: 100, nullable: true),
-                    state = table.Column<string>(type: "character varying(100)", unicode: false, maxLength: 100, nullable: true),
-                    country = table.Column<string>(type: "character varying(100)", unicode: false, maxLength: 100, nullable: true),
-                    postal_code = table.Column<string>(type: "character varying(100)", unicode: false, maxLength: 100, nullable: true),
+                    City = table.Column<string>(type: "character varying(100)", unicode: false, maxLength: 100, nullable: true),
+                    State = table.Column<string>(type: "character varying(100)", unicode: false, maxLength: 100, nullable: true),
+                    Country = table.Column<string>(type: "character varying(100)", unicode: false, maxLength: 100, nullable: true),
+                    PostalCode = table.Column<string>(type: "character varying(100)", unicode: false, maxLength: 100, nullable: true),
                     Status = table.Column<string>(type: "text", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     UpdatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)

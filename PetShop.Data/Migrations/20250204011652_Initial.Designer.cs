@@ -12,8 +12,8 @@ using PetShop.Data.Context;
 namespace PetShop.Data.Migrations
 {
     [DbContext(typeof(PetShopContext))]
-    [Migration("20250201003027_inittial")]
-    partial class inittial
+    [Migration("20250204011652_Initial")]
+    partial class Initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -123,7 +123,9 @@ namespace PetShop.Data.Migrations
                         .HasColumnType("character varying(100)");
 
                     b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("timestamp with time zone");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("timestamp with time zone")
+                        .HasDefaultValueSql("CURRENT_TIMESTAMP");
 
                     b.Property<string>("Email")
                         .IsRequired()
@@ -144,7 +146,7 @@ namespace PetShop.Data.Migrations
                     b.Property<string>("RegistrationNumber")
                         .IsRequired()
                         .HasMaxLength(18)
-                        .IsUnicode(false)
+                        .IsUnicode(true)
                         .HasColumnType("character varying(18)");
 
                     b.Property<string>("State")
@@ -301,8 +303,18 @@ namespace PetShop.Data.Migrations
                         .IsUnicode(false)
                         .HasColumnType("character varying(100)");
 
+                    b.Property<string>("City")
+                        .HasMaxLength(100)
+                        .IsUnicode(false)
+                        .HasColumnType("character varying(100)");
+
                     b.Property<int>("CompanyId")
                         .HasColumnType("integer");
+
+                    b.Property<string>("Country")
+                        .HasMaxLength(100)
+                        .IsUnicode(false)
+                        .HasColumnType("character varying(100)");
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("timestamp with time zone");
@@ -331,10 +343,20 @@ namespace PetShop.Data.Migrations
                         .IsUnicode(false)
                         .HasColumnType("character varying(11)");
 
+                    b.Property<string>("PostalCode")
+                        .HasMaxLength(100)
+                        .IsUnicode(false)
+                        .HasColumnType("character varying(100)");
+
                     b.Property<string>("RegistrationNumber")
                         .HasMaxLength(11)
                         .IsUnicode(false)
                         .HasColumnType("character varying(11)");
+
+                    b.Property<string>("State")
+                        .HasMaxLength(100)
+                        .IsUnicode(false)
+                        .HasColumnType("character varying(100)");
 
                     b.Property<string>("Status")
                         .IsRequired()
@@ -346,26 +368,6 @@ namespace PetShop.Data.Migrations
                     b.Property<string>("UserType")
                         .IsRequired()
                         .HasColumnType("text");
-
-                    b.Property<string>("city")
-                        .HasMaxLength(100)
-                        .IsUnicode(false)
-                        .HasColumnType("character varying(100)");
-
-                    b.Property<string>("country")
-                        .HasMaxLength(100)
-                        .IsUnicode(false)
-                        .HasColumnType("character varying(100)");
-
-                    b.Property<string>("postal_code")
-                        .HasMaxLength(100)
-                        .IsUnicode(false)
-                        .HasColumnType("character varying(100)");
-
-                    b.Property<string>("state")
-                        .HasMaxLength(100)
-                        .IsUnicode(false)
-                        .HasColumnType("character varying(100)");
 
                     b.HasKey("UserId");
 
