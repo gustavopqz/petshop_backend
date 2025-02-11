@@ -15,6 +15,7 @@ namespace PetShop.Application.Services
         private readonly IUsersRepository _usersRepository;
         private readonly MemoryCacheService _memoryCacheService;
 
+
         public UsersService(IUsersRepository usersRepository, MemoryCacheService memoryCache)
         {
             _usersRepository = usersRepository;
